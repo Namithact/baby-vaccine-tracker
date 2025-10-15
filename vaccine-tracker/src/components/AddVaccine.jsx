@@ -1,7 +1,6 @@
 import { FaPlus } from "react-icons/fa";
 export default function AddVaccine({setAddVaccine}) {
     function addVaccine(){
-        console.log("add vaccine");
         setAddVaccine(true);
     }
   return (

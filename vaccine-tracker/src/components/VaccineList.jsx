@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaPen, FaSave, FaTimes } from "react-icons/fa";
 import AddVaccineRow from "./AddVaccineRow";
-export default function VaccineList({addVaccine,setAddVaccine}) {
+export default function VaccineList({ addVaccine, setAddVaccine }) {
   const [vaccines, setVaccines] = useState([
     {
       id: 1,
@@ -27,7 +27,7 @@ export default function VaccineList({addVaccine,setAddVaccine}) {
   ]);
   const [editId, setEditId] = useState(null);
   const [editedData, setEditedData] = useState({});
-  
+
   function handleVaccineEdit(vaccine, e) {
     console.log("editing vaccine function", vaccine);
     setEditId(vaccine.id);
@@ -46,6 +46,10 @@ export default function VaccineList({addVaccine,setAddVaccine}) {
   function handleCancelEdit() {
     console.log("inside edit cancel");
     setEditId(null);
+  }
+  function addNewVaccine(vaccine) {
+    console.log("new vaccine",addVaccine)
+    setVaccines((prevVaccine) => [...prevVaccine, vaccine]);
   }
   return (
     <table className="min-w-full border-collapse">
@@ -154,7 +158,12 @@ export default function VaccineList({addVaccine,setAddVaccine}) {
             </td>
           </tr>
         ))}
-        {addVaccine && <AddVaccineRow setAddVaccine={setAddVaccine}/>}
+        {addVaccine && (
+          <AddVaccineRow
+            addVaccine={addNewVaccine}
+            setAddVaccine={setAddVaccine}
+          />
+        )}
       </tbody>
     </table>
   );
