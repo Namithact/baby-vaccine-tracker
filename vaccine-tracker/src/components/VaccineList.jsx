@@ -29,26 +29,21 @@ export default function VaccineList({ addVaccine, setAddVaccine }) {
   const [editedData, setEditedData] = useState({});
 
   function handleVaccineEdit(vaccine, e) {
-    console.log("editing vaccine function", vaccine);
     setEditId(vaccine.id);
     setEditedData(vaccine);
-    console.log(e);
   }
   function handleChange(vaccine, e) {
     const { name, value } = e.target;
     setEditedData({ ...editedData, [name]: value });
   }
   function handleVaccineSave(data) {
-    console.log("inside vaccine save", data);
     setVaccines(vaccines.map((v) => (data.id === v.id ? editedData : v)));
     setEditId(null);
   }
   function handleCancelEdit() {
-    console.log("inside edit cancel");
     setEditId(null);
   }
   function addNewVaccine(vaccine) {
-    console.log("new vaccine",addVaccine)
     setVaccines((prevVaccine) => [...prevVaccine, vaccine]);
   }
   return (
