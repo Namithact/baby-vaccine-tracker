@@ -7,7 +7,6 @@ export default function AddVaccineRow({ setAddVaccine ,addVaccine}) {
   const [dueDate, setDueDate] = useState("");
   const [status, setStatus] = useState("Completed");
   function handleVaccineSave() {
-    console.log("new vaccine save function");
     const newVaccineAdded = {
       id: 1,
       name: name,
@@ -15,7 +14,6 @@ export default function AddVaccineRow({ setAddVaccine ,addVaccine}) {
       dueDate: dueDate,
       status: status,
     }
-    console.log(newVaccineAdded);
     addVaccine(newVaccineAdded);
     setAddVaccine(false)
   }
