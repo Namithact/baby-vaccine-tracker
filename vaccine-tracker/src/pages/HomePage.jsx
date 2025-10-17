@@ -3,7 +3,9 @@ import BabyDetails from "../components/BabyDetails";
 export default function HomePage() {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50">
+    <div className="flex items-center justify-center min-h-screen">
+   
+      <div className="animated-bg"></div>
       <div className="w-full max-w-md p-6 bg-white rounded-2xl shadow-lg">
         {/* App Heading */}
         <h1 className="text-2xl font-bold text-center text-blue-700 mb-2">

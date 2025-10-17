@@ -7,7 +7,9 @@ export default function Tracker() {
 
 
   return (
-    <div>
+    <div className="relative min-h-screen">
+       {/* Animated pastel background */}
+      <div className="animated-bg"></div>
       {/* <header className="bg-blue-500 text-white py-5 shadow-md">
     <div className="max-w-5xl mx-auto text-center">
       <h1 className="text-3xl font-semibold">Baby Vaccine Tracker</h1>
