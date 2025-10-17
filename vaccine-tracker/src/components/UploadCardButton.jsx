@@ -1,8 +1,34 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { set, get, del } from "idb-keyval";
+import { FaTimes } from "react-icons/fa";
 export default function UploadCardButton() {
   const [photo, setPhoto] = useState(null);
+  //  Load saved image on mount
+  useEffect(() => {
+    async function loadImage() {
+      const saved = await get("vaccineCardImage");
+      if (saved) setPhoto(saved);
+    }
+    loadImage();
+  }, []);
+  //  Handle file upload
+  async function handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const imageDataUrl = event.target.result;
+      setPhoto(imageDataUrl);
+      await set("vaccineCardImage", imageDataUrl); // store in IndexedDB
+    };
+    reader.readAsDataURL(file); // convert to base64
+  }
+  // 🔹 Delete image
+  async function handleRemove() {
+    await del("vaccineCardImage");
+    setPhoto(null);
+  }
   return (
     <div className="mt-6 flex flex-col items-start relative">
       <label
@@ -33,12 +59,7 @@ export default function UploadCardButton() {
         type="file"
         accept="image/*"
         className="hidden"
-        onChange={(e) => {
-          const file = e.target.files && e.target.files[0];
-          if (file) {
-            setPhoto(URL.createObjectURL(file));
-          }
-        }}
+        onChange={handleFileUpload}
       />
 
       {photo && (
@@ -49,7 +70,12 @@ export default function UploadCardButton() {
             alt="Vaccine Card Preview"
             className=" w-40 h-auto rounded-lg w-64 h-auto rounded-lg shadow-md border"
           />
-          <button onClick={() => setPhoto(null)} className="absolute top-1 right-1">×</button>
+          <button
+            onClick={handleRemove}
+            className="absolute top-2 right-2 text-gray-600 hover:text-red-500"
+          >
+            <FaTimes />
+          </button>
         </div>
       )}
     </div>
