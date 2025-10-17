@@ -9,9 +9,9 @@ export default function VaccineList({ addVaccine, setAddVaccine }) {
     setVaccines(storedVaccines);
   }, []);
   useEffect(() => {
-      if (vaccines.length > 0) {
-    localStorage.setItem("vaccineDetails", JSON.stringify(vaccines));
-  }
+    if (vaccines.length > 0) {
+      localStorage.setItem("vaccineDetails", JSON.stringify(vaccines));
+    }
   }, [vaccines]);
   const [editId, setEditId] = useState(null);
   const [editedData, setEditedData] = useState({});
