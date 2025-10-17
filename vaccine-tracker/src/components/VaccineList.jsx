@@ -1,30 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPen, FaSave, FaTimes } from "react-icons/fa";
 import AddVaccineRow from "./AddVaccineRow";
 export default function VaccineList({ addVaccine, setAddVaccine }) {
-  const [vaccines, setVaccines] = useState([
-    {
-      id: 1,
-      name: "BCG",
-      dateTaken: "2025-01-12",
-      dueDate: "—",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      name: "Hepatitis B",
-      dateTaken: "2025-03-10",
-      dueDate: "2025-09-10",
-      status: "Upcoming",
-    },
-    {
-      id: 3,
-      name: "Polio",
-      dateTaken: "—",
-      dueDate: "2025-05-01",
-      status: "Pending",
-    },
-  ]);
+  const [vaccines, setVaccines] = useState([]);
+  useEffect(() => {
+    const storedVaccines =
+      JSON.parse(localStorage.getItem("vaccineDetails")) || [];
+    setVaccines(storedVaccines);
+  }, []);
+  useEffect(() => {
+      if (vaccines.length > 0) {
+    localStorage.setItem("vaccineDetails", JSON.stringify(vaccines));
+  }
+  }, [vaccines]);
   const [editId, setEditId] = useState(null);
   const [editedData, setEditedData] = useState({});
 
