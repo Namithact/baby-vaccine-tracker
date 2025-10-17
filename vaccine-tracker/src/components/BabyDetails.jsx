@@ -1,5 +1,11 @@
 export default function BabyDetails() {
-  const babyDetails = JSON.parse(localStorage.getItem("babyDetails"));
+  //const babyDetails = JSON.parse(localStorage.getItem("babyDetails"));
+  const babyDetails = {
+    name: "Advik Sanu",
+    dob: "04 April 2024",
+    birthweight: "3.120 kg",
+    bloodgroup: "b+",
+  };
   const dob = babyDetails.dob;
   function calculateAge(birthDate) {
     const today = new Date();
